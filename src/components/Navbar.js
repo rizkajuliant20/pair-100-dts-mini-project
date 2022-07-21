@@ -53,7 +53,6 @@ const Navbar = () => {
             </IconButton>
             <img src={Logo} alt="broken image" style={{width: "30px"}}/>
           </div>
-          
           <div>
             <Button key="Home" component={Link} to="/" variant="contained" color="primary">Home</Button>
             {!isLogin && <Button key="Register" component={Link} to="/register" variant="contained" color="primary">Register</Button>}
