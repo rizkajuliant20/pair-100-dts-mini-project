@@ -1,5 +1,7 @@
-const MovieDetail = () => {
-    return (<div>Add Movie Detail</div>)
-}
+import MovieDetails from "../../components/MovieDetails";
 
-export default MovieDetail
+const MovieDetail = () => {
+  return (<MovieDetails/>);
+};
+
+export default MovieDetail;
