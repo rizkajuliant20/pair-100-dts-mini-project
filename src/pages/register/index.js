@@ -1,68 +1,103 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/firebase'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
 
-const defaultValue = {
-    email: "",
-    password: "",
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+
+const Copyright = (props) => {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
 };
 
-
 const Register = () => {
-    const [input, setInput] = useState(defaultValue)
+  const navigate = useNavigate();
 
-    const [errorMessage, setErrorMessage] = useState('')
-    
-    const navigate = useNavigate();
-    
-    //Handle input change
-    const handleInputChange = (value, type) => {
-        setInput({
-            ...input,
-            [type]: value
-        })
-    };
-    
-    //handle submit button
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        try {
-            const registerUser = await createUserWithEmailAndPassword(auth, input.email, input.password)
-            console.log(registerUser)
-            // navigate('/')
-        } catch (error) {
-            console.log(error)
-        }
-    
+  //handle submit button
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    try {
+      const sendRegisterData = await createUserWithEmailAndPassword(
+        auth,
+        data.get("email"),
+        data.get("password")
+      );
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
-    
+  };
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <div className='register-email'>
-                        <p>Email</p>
-                        <input onChange={(event) => handleInputChange(event.target.value, 'email')} type='email' name='register-email'/>
-                    </div>
-                    <div className='register-pass'>
-                        <p>Password</p>
-                        <input onChange={(event) => handleInputChange(event.target.value, 'password')} type='password' name='register-password'/>
-                    </div>
-                    {/* <div className='register-pass-confirm'>
-                        <p>Password Confirmation</p>
-                        <input onChange={(event) => handleInputChange(event.target.value, 'password')} type='password' name='register-password-confirmation'/>
-                    </div> */}
-                    <div className='register-btn'>
-                        <p>-------------------------</p>
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-                <div>{errorMessage}</div>
-            </form>
-        </div>
-    )
-}
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Sign Up
+          </Button>
+          <Grid container>
+            <Grid item>
+              <Link href="/register" variant="body2">
+                {"Already have account? Sign In"}
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
+  );
+};
 
-export default Register
+export default Register;
