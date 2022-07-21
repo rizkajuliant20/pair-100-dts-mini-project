@@ -10,6 +10,7 @@ import { ThemeProvider } from "@mui/material";
 
 import theme from "./styles/theme";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="movie-detail/:id" element={<MovieDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer/>
       </ThemeProvider>
     </BrowserRouter>
   );
