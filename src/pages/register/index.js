@@ -30,7 +30,7 @@ const Register = () => {
         try {
             const registerUser = await createUserWithEmailAndPassword(auth, input.email, input.password)
             console.log(registerUser)
-            // navigate('/')
+            navigate('/')
         } catch (error) {
             console.log(error)
         }
@@ -50,10 +50,6 @@ const Register = () => {
                         <p>Password</p>
                         <input onChange={(event) => handleInputChange(event.target.value, 'password')} type='password' name='register-password'/>
                     </div>
-                    {/* <div className='register-pass-confirm'>
-                        <p>Password Confirmation</p>
-                        <input onChange={(event) => handleInputChange(event.target.value, 'password')} type='password' name='register-password-confirmation'/>
-                    </div> */}
                     <div className='register-btn'>
                         <p>-------------------------</p>
                         <button type="submit">Submit</button>
