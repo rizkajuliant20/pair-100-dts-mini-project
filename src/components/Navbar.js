@@ -28,17 +28,6 @@ const Navbar = () => {
   const isLogin = user ? true : false
 
   return (
-    // <Box sx={{ flexGrow: 1 }}>
-    //   <AppBar position="static" component="nav">
-    //     <Toolbar>
-    //       <SvgIcon component={Logo} inheritViewBox sx={{ mr: 5 }} />
-    //       <Button key="Home" component={Link} to="/" variant="contained" color="primary">Home</Button>
-    //       {!isLogin && <Button key="Register" component={Link} to="/register" variant="contained" color="primary">Register</Button>}
-    //       {!isLogin && <Button key="Login" component={Link} to="/login" variant="contained" color="primary">Login</Button>}
-    //       {isLogin && <Button key="Logout" onClick={handleLogout} i component={Link} to="/" variant="contained" color="primary">Logout</Button>}
-    //     </Toolbar>
-    //   </AppBar>
-    // </Box>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar  sx={{ display: "flex", justifyContent: "space-between" }}>
