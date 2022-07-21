@@ -2,14 +2,19 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { useNavigate } from "react-router-dom";
+import { auth } from '../config/firebase';
+import useAuth from '../hooks/useAuth';
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original'
 
 export default function MovieCard({ movie }) {
+  const { user } = useAuth();
+  const isLogin = user ? true : false
+  
   let navigate = useNavigate();
   const onClickHandler = (movie) => {
     // console.log(movie);
-    navigate(`/movie-detail/${movie.id}`);
+    isLogin && navigate(`/movie-detail/${movie.id}`);
   }
 
   return (
